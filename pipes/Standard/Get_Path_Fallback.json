@@ -1,18 +1,32 @@
 {
-    "id": "7375dfb0-c61f-4626-b4f5-4012e7bf6ca8",
+    "id": "7ecb2c87-80c6-481d-af31-fb4c0659fbe9",
     "label": "Get Path Fallback",
+    "params": [
+        {
+            "name": "path",
+            "type": "string",
+            "value": "",
+            "source": "dataPaths"
+        },
+        {
+            "name": "fallbackPath",
+            "type": "string",
+            "value": "",
+            "source": "dataPaths"
+        }
+    ],
     "pipeline": {
-        "id": "448806d2-bde4-4e19-b646-81087d0833fa",
+        "id": "49812ec0-4986-4e47-be3f-cf699539672c",
         "pipes": [
             {
-                "id": "94848053-14d0-432d-bdd4-d5f4c072b790",
+                "id": "ee4f36bb-78e5-4200-89aa-1d52525064a4",
                 "enabled": true,
                 "bindings": [],
                 "valuePipeline": {
-                    "id": "f84a94bf-54ff-442b-b528-378f50f973da",
+                    "id": "83984afc-aba6-4bc6-a21f-493de8f00e07",
                     "pipes": [
                         {
-                            "id": "2c7f9033-2fdd-4174-a8e4-6a48d0d4f03a",
+                            "id": "355f5bae-e472-49cc-aa6d-1e0a09ec77a5",
                             "enabled": true,
                             "bindings": [
                                 {
@@ -27,10 +41,10 @@
                     ]
                 },
                 "fallbackPipeline": {
-                    "id": "6da1f62d-9516-4080-a4a4-2e525d41bcfd",
+                    "id": "e2f75aa8-0fd8-44e4-97c8-4fe553c9b12b",
                     "pipes": [
                         {
-                            "id": "fc204338-245d-42e6-ac99-46294a9ccc73",
+                            "id": "d5bc31a7-5849-428a-aa5f-f66e5f2cfa04",
                             "enabled": true,
                             "bindings": [
                                 {
