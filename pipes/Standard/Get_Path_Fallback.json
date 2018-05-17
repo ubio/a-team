@@ -1,0 +1,50 @@
+{
+    "label": "Get Path Fallback",
+    "pipeline": {
+        "id": "448806d2-bde4-4e19-b646-81087d0833fa",
+        "pipes": [
+            {
+                "id": "94848053-14d0-432d-bdd4-d5f4c072b790",
+                "enabled": true,
+                "bindings": [],
+                "valuePipeline": {
+                    "id": "f84a94bf-54ff-442b-b528-378f50f973da",
+                    "pipes": [
+                        {
+                            "id": "2c7f9033-2fdd-4174-a8e4-6a48d0d4f03a",
+                            "enabled": true,
+                            "bindings": [
+                                {
+                                    "name": "path",
+                                    "binding": "path"
+                                }
+                            ],
+                            "path": null,
+                            "optional": true,
+                            "type": "value/get-path"
+                        }
+                    ]
+                },
+                "fallbackPipeline": {
+                    "id": "6da1f62d-9516-4080-a4a4-2e525d41bcfd",
+                    "pipes": [
+                        {
+                            "id": "fc204338-245d-42e6-ac99-46294a9ccc73",
+                            "enabled": true,
+                            "bindings": [
+                                {
+                                    "name": "path",
+                                    "binding": "fallbackPath"
+                                }
+                            ],
+                            "path": null,
+                            "optional": true,
+                            "type": "value/get-path"
+                        }
+                    ]
+                },
+                "type": "value/fallback"
+            }
+        ]
+    }
+}
