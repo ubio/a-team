@@ -1,0 +1,53 @@
+{
+    "id": "ead86f93-8e38-4054-8fca-6fed898d3b46",
+    "label": "Query Exists",
+    "pipeline": {
+        "id": "01989b07-8db7-4791-8890-f5c69eedfb88",
+        "pipes": [
+            {
+                "id": "9c1c9555-8080-44cd-8ab0-817cb1268a7c",
+                "enabled": true,
+                "bindings": [
+                    {
+                        "name": "selector",
+                        "binding": "selector"
+                    }
+                ],
+                "selector": null,
+                "optional": true,
+                "type": "dom/query-all"
+            },
+            {
+                "id": "1e405f56-6c1c-45b8-b757-8ec95ad179ca",
+                "enabled": true,
+                "bindings": [],
+                "pipeline": {
+                    "id": "7c8d9872-dbaf-43a3-af01-59a4f93afb13",
+                    "pipes": [
+                        {
+                            "id": "12838c56-a432-4399-a2e7-a786e19a71b9",
+                            "enabled": true,
+                            "bindings": [],
+                            "type": "dom/is-visible"
+                        }
+                    ]
+                },
+                "type": "other/filter"
+            },
+            {
+                "id": "3555b7b2-1c6e-4ba4-916d-727d1d2e8139",
+                "enabled": true,
+                "bindings": [],
+                "type": "other/fold-exists"
+            }
+        ]
+    },
+    "sha": null,
+    "params": [
+        {
+            "name": "selector",
+            "type": "selector",
+            "value": ""
+        }
+    ]
+}
