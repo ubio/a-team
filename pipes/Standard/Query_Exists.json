@@ -1,6 +1,7 @@
 {
     "id": "ead86f93-8e38-4054-8fca-6fed898d3b46",
     "label": "Query Exists",
+    "description": "Returns `true` if 1 or more elements are found by `selector` and are visible, or `false` if no such elements are found.",
     "pipeline": {
         "id": "01989b07-8db7-4791-8890-f5c69eedfb88",
         "pipes": [

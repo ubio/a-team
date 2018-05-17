@@ -1,6 +1,7 @@
 {
     "id": "1bb44579-4320-4361-a4fd-630705f95bff",
     "label": "Get Referrer",
+    "description": "Returns `document.referrer`",
     "pipeline": {
         "id": "868c3193-f56c-4734-9156-8f975e3d2f34",
         "pipes": [

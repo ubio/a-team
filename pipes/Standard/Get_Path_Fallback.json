@@ -1,6 +1,7 @@
 {
     "id": "7ecb2c87-80c6-481d-af31-fb4c0659fbe9",
     "label": "Get Path Fallback",
+    "description": "Returns a value at specified `path` if it exists, otherwise returns value at specified `fallbackPath`. Inputs must be objects.",
     "params": [
         {
             "name": "path",
