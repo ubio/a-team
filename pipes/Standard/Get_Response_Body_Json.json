@@ -1,0 +1,29 @@
+{
+    "id": "4a36127b-de2f-4d5b-8a5a-1cffcc7de1cb",
+    "label": "Get Response Body Json",
+    "pipeline": {
+        "id": "f7f0884a-a2ce-4246-acab-06452df5b490",
+        "pipes": [
+            {
+                "id": "ed70a5c6-712d-488b-a902-840f36b8e1c0",
+                "enabled": true,
+                "bindings": [],
+                "path": "/requestId",
+                "optional": false,
+                "type": "value/get-path"
+            },
+            {
+                "id": "194fa358-c9a2-4e2b-b438-c73cad49324b",
+                "enabled": true,
+                "bindings": [],
+                "type": "other/get-network-response-body"
+            },
+            {
+                "id": "d4e5f0c6-24fe-4f6f-826a-d1998060b44b",
+                "enabled": true,
+                "bindings": [],
+                "optional": false,
+                "type": "value/parse-json"
+            }
+        ]
+    }

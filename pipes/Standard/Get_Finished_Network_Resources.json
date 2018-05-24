@@ -1,6 +1,6 @@
 {
     "id": "d096217a-d204-4a17-addd-ab2404935b21",
-    "label": "Get Finished Network Requests",
+    "label": "Get Finished Network Resources",
     "pipeline": {
         "id": "cd8695ac-717d-4479-97c1-8538489fa529",
         "pipes": [
@@ -13,8 +13,38 @@
                         "binding": "resourceType"
                     }
                 ],
-                "resourceType": null,
                 "type": "other/get-network-resources"
+            },
+            {
+                "id": "9345edfb-41bf-413c-8147-76ece6675ae8",
+                "enabled": true,
+                "bindings": [],
+                "pipeline": {
+                    "id": "bea7710b-581e-4497-b4ce-10a3b963266e",
+                    "pipes": [
+                        {
+                            "id": "5c011450-e856-4dc4-9aff-690c0825d05d",
+                            "enabled": true,
+                            "bindings": [],
+                            "path": "/type",
+                            "optional": false,
+                            "type": "value/get-path"
+                        },
+                        {
+                            "id": "319ffc36-54aa-49e6-a891-b291271f132c",
+                            "enabled": true,
+                            "bindings": [
+                                {
+                                    "name": "text",
+                                    "binding": "resourceType"
+                                }
+                            ],
+                            "text": null,
+                            "type": "value/equals-text"
+                        }
+                    ]
+                },
+                "type": "other/filter"
             },
             {
                 "id": "a9c0e475-d123-420f-8b5c-f01e28ab6d28",
@@ -124,7 +154,7 @@
                 "id": "eefa70e9-7e04-4723-bb98-b7d8d4ae2080",
                 "enabled": true,
                 "bindings": [],
-                "path": "/url",
+                "path": "/request/url",
                 "onNull": "bypass",
                 "pipeline": {
                     "id": "0e10f42d-7a2a-4bf6-85e6-02b486ca9a69",
@@ -159,7 +189,7 @@
                             "id": "16a41f4e-99d4-4344-866e-876b8db4ea35",
                             "enabled": true,
                             "bindings": [],
-                            "path": "/url/hostname",
+                            "path": "/request/url/hostname",
                             "optional": false,
                             "type": "value/get-path"
                         },
@@ -190,7 +220,7 @@
                             "id": "4e76215f-23bd-4f8d-85dc-f39e9907f498",
                             "enabled": true,
                             "bindings": [],
-                            "path": "/url/pathname",
+                            "path": "/request/url/pathname",
                             "optional": false,
                             "type": "value/get-path"
                         },
@@ -209,6 +239,84 @@
                     ]
                 },
                 "type": "other/filter"
+            },
+            {
+                "id": "3f83963c-ae99-46cc-a346-4ad1ea507931",
+                "enabled": true,
+                "bindings": [],
+                "keys": [
+                    "request",
+                    "response",
+                    "requestId"
+                ],
+                "type": "value/pick"
+            },
+            {
+                "id": "b0c03094-58d2-4ed8-b147-9942a5d24982",
+                "enabled": true,
+                "bindings": [],
+                "path": "/request",
+                "onNull": "bypass",
+                "pipeline": {
+                    "id": "761238d2-ea85-4b35-ac9f-91434cadae0d",
+                    "pipes": [
+                        {
+                            "id": "c9a3461f-4685-480d-85a4-73593b245851",
+                            "enabled": true,
+                            "bindings": [],
+                            "path": "/request",
+                            "optional": false,
+                            "type": "value/get-path"
+                        },
+                        {
+                            "id": "44934d79-bb51-46d0-b011-c4ca6b5ec36c",
+                            "enabled": true,
+                            "bindings": [],
+                            "keys": [
+                                "url",
+                                "headers",
+                                "method",
+                                "postBody"
+                            ],
+                            "type": "value/pick"
+                        }
+                    ]
+                },
+                "type": "value/set-path"
+            },
+            {
+                "id": "fd3920c5-e5f8-44ab-baac-326416ce8f8b",
+                "enabled": true,
+                "bindings": [],
+                "path": "/response",
+                "onNull": "bypass",
+                "pipeline": {
+                    "id": "55a87c3c-2154-4628-af32-4e048ab62c5f",
+                    "pipes": [
+                        {
+                            "id": "39292822-0eae-4afa-b006-896404add561",
+                            "enabled": true,
+                            "bindings": [],
+                            "path": "/response",
+                            "optional": false,
+                            "type": "value/get-path"
+                        },
+                        {
+                            "id": "fbe1423b-b1b1-48ed-8c45-8ec3801e5063",
+                            "enabled": true,
+                            "bindings": [],
+                            "keys": [
+                                "status",
+                                "statusText",
+                                "body",
+                                "mimeType",
+                                "headers"
+                            ],
+                            "type": "value/pick"
+                        }
+                    ]
+                },
+                "type": "value/set-path"
             }
         ]
     },
@@ -220,6 +328,7 @@
             "value": "XHR",
             "enum": [
                 "XHR",
+                "Fetch",
                 "Document",
                 "Stylesheet",
                 "Image",
@@ -227,7 +336,6 @@
                 "Font",
                 "Script",
                 "TextTrack",
-                "Fetch",
                 "EventSource",
                 "WebSocket",
                 "Manifest",
