@@ -1,6 +1,6 @@
 {
     "id": "d096217a-d204-4a17-addd-ab2404935b21",
-    "label": "Get Finished Network Resources",
+    "label": "Select Network Resources",
     "pipeline": {
         "id": "cd8695ac-717d-4479-97c1-8538489fa529",
         "pipes": [
