@@ -1,0 +1,34 @@
+{
+    "id": "cc6c0676-38a2-490a-9650-b80e38f1c4e7",
+    "label": "Date Multi-Format",
+    "pipeline": {
+        "id": "2b3388f4-4a6d-4ee5-825a-8504fb867c33",
+        "pipes": [
+            {
+                "id": "8f1b3fba-6072-4bca-abcf-c83ac7cb3a4e",
+                "enabled": true,
+                "bindings": [],
+                "mode": "value",
+                "expression": "const formats = ctx.resolveParam('formats');\nfor (const fmt of formats) {\n  \n  const val = ctx.moment.utc(value, fmt.format, false);\n  if (val.isValid()) {\n    return val.format('YYYY-MM-DD HH:mm:ss');\n\t}\n}\nreturn null;",
+                "type": "other/javascript"
+            }
+        ]
+    },
+    "sha": null,
+    "params": [
+        {
+            "name": "formats",
+            "singular": "format",
+            "type": "recordset",
+            "value": [],
+            "fields": [
+                {
+                    "type": "string",
+                    "name": "format",
+                    "value": "",
+                    "placeholder": "YYYY-MM-DD HH:mm:ss"
+                }
+            ]
+        }
+    ]
+}
