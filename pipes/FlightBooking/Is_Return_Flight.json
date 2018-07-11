@@ -2,23 +2,23 @@
     "id": "35461bdb-dc6a-40da-9696-b1965b1b7a19",
     "label": "Is Return Flight",
     "pipeline": {
-    "id": "fa5b3ef8-c2ce-4f27-bf50-25f968c79c8d",
-    "pipes": [
-        {
-        "id": "67b1c7ae-dba6-4a48-bc2b-eee8e3c151c2",
-        "enabled": true,
-        "bindings": [],
-        "inputKey": "search",
-        "type": "value/get-input"
-        },
-        {
-        "id": "4c5d43a1-4fd8-4e70-a54e-acf0cecb967d",
-        "enabled": true,
-        "bindings": [],
-        "path": "/inbound",
-        "type": "value/has-path"
-        }
-    ]
+        "id": "fa5b3ef8-c2ce-4f27-bf50-25f968c79c8d",
+        "pipes": [
+            {
+                "id": "67b1c7ae-dba6-4a48-bc2b-eee8e3c151c2",
+                "enabled": true,
+                "bindings": [],
+                "inputKey": "search",
+                "type": "value/get-input"
+            },
+            {
+                "id": "4c5d43a1-4fd8-4e70-a54e-acf0cecb967d",
+                "enabled": true,
+                "bindings": [],
+                "path": "/inbound",
+                "type": "value/has-path"
+            }
+        ]
     },
     "sha": null,
     "params": []

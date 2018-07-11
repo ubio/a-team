@@ -1,0 +1,84 @@
+{
+    "id": "9aa6b521-a4a0-436d-9f00-275a12bd5731",
+    "label": "Filter Text Equals Date",
+    "pipeline": {
+        "id": "b42dc8c8-cfe2-42a0-8b2a-3b30677157b8",
+        "pipes": [
+            {
+                "id": "f009e32e-806a-40ed-b524-500c531d2db9",
+                "enabled": true,
+                "bindings": [],
+                "pipeline": {
+                    "id": "fc86b65e-001d-4ecd-8932-a14b4a23b4e6",
+                    "pipes": [
+                        {
+                            "id": "cc77c1fc-3379-4f19-ae1b-faa086e59812",
+                            "enabled": true,
+                            "bindings": [],
+                            "pipelineA": {
+                                "id": "618b72b4-2b8b-47e1-80ec-dbc23c406b57",
+                                "pipes": [
+                                    {
+                                        "id": "9391f086-3819-4b49-8ece-d9d5e63c396b",
+                                        "enabled": true,
+                                        "bindings": [],
+                                        "type": "dom/text"
+                                    }
+                                ]
+                            },
+                            "pipelineB": {
+                                "id": "f71216c5-de5d-4cc2-9ec1-afcbf3402daa",
+                                "pipes": [
+                                    {
+                                        "id": "e40e7254-4ee5-44d5-a46f-aa3c63d5eec3",
+                                        "enabled": true,
+                                        "bindings": [
+                                            {
+                                                "name": "path",
+                                                "binding": "path"
+                                            }
+                                        ],
+                                        "path": null,
+                                        "optional": false,
+                                        "type": "value/get-path"
+                                    },
+                                    {
+                                        "id": "3772330e-8dca-4906-828f-6fc24cf13ceb",
+                                        "enabled": true,
+                                        "bindings": [
+                                            {
+                                                "name": "format",
+                                                "binding": "format"
+                                            }
+                                        ],
+                                        "format": null,
+                                        "strict": true,
+                                        "type": "value/format-date"
+                                    }
+                                ]
+                            },
+                            "type": "value/equals"
+                        }
+                    ]
+                },
+                "type": "other/filter"
+            }
+        ]
+    },
+    "sha": null,
+    "params": [
+        {
+            "name": "path",
+            "type": "string",
+            "value": "/dateOfBirth",
+            "source": "dataPaths"
+        },
+        {
+            "name": "format",
+            "label": "Date Format",
+            "type": "string",
+            "placeholder": "YYYY-MM-DD HH:mm:ss",
+            "value": "DD"
+        }
+    ]
+}

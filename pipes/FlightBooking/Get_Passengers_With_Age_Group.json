@@ -1,0 +1,143 @@
+{
+    "id": "995d009d-3a82-4f57-8d7e-f70591b0b884",
+    "label": "Get Passengers With Age/Group",
+    "pipeline": {
+        "id": "4f01569f-0299-4952-932b-b2cff266142a",
+        "pipes": [
+            {
+                "id": "37a9bc4a-560c-4483-8379-a404efb0fc21",
+                "enabled": true,
+                "bindings": [],
+                "inputKey": "passengers",
+                "type": "value/get-input"
+            },
+            {
+                "id": "ac095e35-debd-4f96-be96-b65adb3c2c09",
+                "enabled": true,
+                "bindings": [],
+                "type": "other/unfold-array"
+            },
+            {
+                "id": "765d8383-c1d0-4c8f-a53c-d0306373cc21",
+                "enabled": true,
+                "bindings": [],
+                "path": "/referenceDate",
+                "onNull": "bypass",
+                "pipeline": {
+                    "id": "5f1f0e25-acb5-442d-ae94-bd5fde8370b5",
+                    "pipes": [
+                        {
+                            "id": "1c40f529-f28e-4f38-ba94-6f37af957a5d",
+                            "enabled": true,
+                            "bindings": [],
+                            "inputKey": "selectedOutboundFlight",
+                            "type": "value/get-input"
+                        },
+                        {
+                            "id": "9ddcab02-c930-4b0a-8bd3-53ffade0c7e0",
+                            "enabled": true,
+                            "bindings": [],
+                            "path": "/origin/dateTime",
+                            "optional": false,
+                            "type": "value/get-path"
+                        }
+                    ]
+                },
+                "type": "value/set-path"
+            },
+            {
+                "id": "180b42ae-ed38-4f54-9d87-6138e9ba6c93",
+                "enabled": true,
+                "bindings": [],
+                "path": "/age",
+                "onNull": "bypass",
+                "pipeline": {
+                    "id": "a1ea8ae5-6e5e-48f8-8660-718ecd8c1d3d",
+                    "pipes": [
+                        {
+                            "id": "d3a0f7c9-e860-4bda-a4ca-e5973e270e03",
+                            "enabled": true,
+                            "bindings": [],
+                            "type": "value/calc-age"
+                        }
+                    ]
+                },
+                "type": "value/set-path"
+            },
+            {
+                "id": "75262cac-8476-4e29-8b06-d7081d00a20e",
+                "enabled": true,
+                "bindings": [],
+                "path": "/ageGroup",
+                "onNull": "bypass",
+                "pipeline": {
+                    "id": "f52675ba-c984-4b10-9642-8c6ca3d124d8",
+                    "pipes": [
+                        {
+                            "id": "adda887b-021c-4aed-8ea8-eacdfa86518c",
+                            "enabled": true,
+                            "bindings": [],
+                            "path": "/age",
+                            "optional": false,
+                            "type": "value/get-path"
+                        },
+                        {
+                            "id": "66ec31ab-a097-40f4-a1bd-437780245302",
+                            "enabled": true,
+                            "bindings": [
+                                {
+                                    "name": "ranges",
+                                    "binding": "ranges"
+                                }
+                            ],
+                            "ranges": null,
+                            "type": "value/map-range"
+                        }
+                    ]
+                },
+                "type": "value/set-path"
+            }
+        ]
+    },
+    "sha": null,
+    "params": [
+        {
+            "name": "ranges",
+            "type": "recordset",
+            "value": [
+                {
+                    "value": "infant",
+                    "min": null,
+                    "max": 2
+                },
+                {
+                    "value": "children",
+                    "min": 2,
+                    "max": 12
+                },
+                {
+                    "value": "adult",
+                    "min": 12,
+                    "max": null
+                }
+            ],
+            "singular": "range",
+            "fields": [
+                {
+                    "name": "value",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "min",
+                    "type": "number",
+                    "value": null
+                },
+                {
+                    "name": "max",
+                    "type": "number"
+                }
+            ]
+        }
+    ]
+}
