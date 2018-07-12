@@ -1,6 +1,7 @@
 {
     "id": "ebe7428f-b794-4afa-9ed4-bc1e51e5aca4",
     "label": "Filter Query Exists",
+    "description": "Keeps the elements which contain a visible child element queried by the defined selector.",
     "pipeline": {
         "id": "a792ee31-31b7-4e4c-84cb-227fdfb36a0b",
         "pipes": [
