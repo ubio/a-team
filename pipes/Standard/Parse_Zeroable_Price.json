@@ -1,0 +1,105 @@
+{
+    "id": "6fb4978b-8553-4fe6-8066-32b88e6f076d",
+    "label": "Parse Zeroable Price",
+    "pipeline": {
+        "id": "a903a89b-0788-42a3-97c6-fecf3733f768",
+        "pipes": [
+            {
+                "id": "7bf41546-fbe1-4f9d-a550-4f6a7d9dc57f",
+                "enabled": true,
+                "bindings": [],
+                "pipelineCondition": {
+                    "id": "8b728b62-1d4a-493e-a385-fcbe800b4e8a",
+                    "pipes": [
+                        {
+                            "id": "9c6fd0ca-ef51-459d-9e1d-cc20032b306c",
+                            "enabled": true,
+                            "bindings": [
+                                {
+                                    "name": "regexp",
+                                    "binding": "zeroPriceRegexp"
+                                }
+                            ],
+                            "regexp": null,
+                            "flags": "ig",
+                            "type": "value/matches-regexp"
+                        }
+                    ]
+                },
+                "pipelinePositive": {
+                    "id": "e701fb23-827e-43ae-b91d-e5944010b831",
+                    "pipes": [
+                        {
+                            "id": "cee5d0b4-b7d9-4c79-92cb-1e5682c399f4",
+                            "enabled": true,
+                            "bindings": [],
+                            "type": "dom/get-document"
+                        },
+                        {
+                            "id": "d8c63ea9-492f-4e14-b03b-0073568700ae",
+                            "enabled": true,
+                            "bindings": [
+                                {
+                                    "name": "definitionId",
+                                    "binding": "definitionId"
+                                }
+                            ],
+                            "definitionId": null,
+                            "type": "other/use"
+                        },
+                        {
+                            "id": "ebd9873f-59e7-434f-b9c1-75d22e1351fb",
+                            "enabled": true,
+                            "bindings": [],
+                            "path": "/value",
+                            "onNull": "bypass",
+                            "pipeline": {
+                                "id": "968cd261-b944-40f3-8f53-b78383ba86fb",
+                                "pipes": [
+                                    {
+                                        "id": "d06cc6d7-db37-42e9-8259-d8d32c583678",
+                                        "enabled": true,
+                                        "bindings": [],
+                                        "value": "0",
+                                        "dataType": "number",
+                                        "type": "value/get-constant"
+                                    }
+                                ]
+                            },
+                            "type": "value/set-path"
+                        }
+                    ]
+                },
+                "pipelineNegative": {
+                    "id": "b8f6d413-65ec-43f0-8de8-a30201ee0d61",
+                    "pipes": [
+                        {
+                            "id": "46e13906-db61-4d44-b34a-df7fb039013b",
+                            "enabled": true,
+                            "bindings": [],
+                            "optional": false,
+                            "exponent": 0,
+                            "allowNegative": false,
+                            "type": "value/parse-price"
+                        }
+                    ]
+                },
+                "type": "other/if-else"
+            }
+        ]
+    },
+    "sha": null,
+    "params": [
+        {
+            "name": "zeroPriceRegexp",
+            "type": "string",
+            "value": "^free$"
+        },
+        {
+            "name": "definitionId",
+            "label": "Reference Price Definition",
+            "type": "definition",
+            "value": null
+        }
+    ]
+}
