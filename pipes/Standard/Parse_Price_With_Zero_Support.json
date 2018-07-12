@@ -1,6 +1,6 @@
 {
     "id": "6fb4978b-8553-4fe6-8066-32b88e6f076d",
-    "label": "Parse Zeroable Price",
+    "label": "Parse Price With Zero Support",
     "pipeline": {
         "id": "a903a89b-0788-42a3-97c6-fecf3733f768",
         "pipes": [
