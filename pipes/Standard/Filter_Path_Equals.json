@@ -1,0 +1,68 @@
+{
+    "id": "74d44439-2cd0-4b35-8223-5ae692173cc2",
+    "label": "Filter Path Equals",
+    "pipeline": {
+        "id": "6a1eb2ab-2d8d-4ad4-b61d-eb647a95db96",
+        "pipes": [
+            {
+                "id": "c6e7db90-b16d-44f4-a56d-78ca9145874a",
+                "enabled": true,
+                "bindings": [],
+                "pipeline": {
+                    "id": "aeb48f2d-8802-40c8-9c2d-0ffe4842b4ef",
+                    "pipes": [
+                        {
+                            "id": "b2592718-0b62-4d5c-abfa-f767aa5d2101",
+                            "enabled": true,
+                            "bindings": [
+                                {
+                                    "name": "pipelineB",
+                                    "binding": "pipeline"
+                                }
+                            ],
+                            "pipelineA": {
+                                "id": "0c9d66bf-1e52-4062-8f94-6fc92d39673f",
+                                "pipes": [
+                                    {
+                                        "id": "f605e045-26d2-4ca4-a87c-1ec8cfc568bf",
+                                        "enabled": true,
+                                        "bindings": [
+                                            {
+                                                "name": "path",
+                                                "binding": "path"
+                                            }
+                                        ],
+                                        "path": null,
+                                        "optional": false,
+                                        "type": "value/get-path"
+                                    }
+                                ]
+                            },
+                            "pipelineB": {
+                                "id": "48a30ea0-817e-494a-8003-5ad9ed422df5",
+                                "pipes": []
+                            },
+                            "type": "value/equals"
+                        }
+                    ]
+                },
+                "type": "other/filter"
+            }
+        ]
+    },
+    "sha": null,
+    "params": [
+        {
+            "name": "path",
+            "type": "string",
+            "value": "",
+            "source": "dataPaths"
+        },
+        {
+            "name": "pipeline",
+            "label": "Pipeline",
+            "type": "pipeline",
+            "value": null
+        }
+    ]
+}
