@@ -13,7 +13,7 @@ function* inspect(action) {
             continue;
         }
         const { label } = pipe.configuration;
-        const status = domains.assets.getPipeStatus(pipe);
+        const status = domains.assets.checkPipeStatus(pipe);
         switch (status) {
             case 'UNTRACKED':
                 yield {
