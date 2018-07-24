@@ -14,7 +14,7 @@ function* inspect(script) {
         }
     }
     yield {
-        level: 'error',
+        level: 'warning',
         message: 'Missing 3D Secure'
     };
 }

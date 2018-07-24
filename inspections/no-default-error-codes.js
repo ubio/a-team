@@ -17,7 +17,7 @@ function* inspect(script) {
     for (const info of script.collectErrorCodesInfo()) {
         if (DEFAULT_ERROR_CODES.includes(info.errorCode)) {
             yield {
-                level: 'error',
+                level: 'warning',
                 message: `Default error code "${info.errorCode}" is not allowed`,
                 context: info.context,
                 action: info.action
