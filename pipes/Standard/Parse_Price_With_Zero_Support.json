@@ -1,18 +1,64 @@
 {
-    "id": "6fb4978b-8553-4fe6-8066-32b88e6f076d",
+    "id": "30b0ee92-a551-459f-9329-2a8e3bab4638",
     "label": "Parse Price With Zero Support",
     "pipeline": {
-        "id": "a903a89b-0788-42a3-97c6-fecf3733f768",
+        "id": "4ce9d692-4674-4249-b219-914a8ee6c4fc",
         "pipes": [
             {
-                "id": "7bf41546-fbe1-4f9d-a550-4f6a7d9dc57f",
+                "id": "51b208f4-616f-41b0-919a-6273364571ce",
+                "enabled": true,
+                "bindings": [],
+                "path": "/input",
+                "type": "value/wrap"
+            },
+            {
+                "id": "2ce40bbb-91e5-44d3-ad46-5d2cfba806da",
+                "enabled": true,
+                "bindings": [],
+                "path": "/reference",
+                "onNull": "bypass",
+                "pipeline": {
+                    "id": "7ca8c70b-6faa-4c51-867e-dade21638491",
+                    "pipes": [
+                        {
+                            "id": "1161ef96-e218-4b88-8034-d5148000d259",
+                            "enabled": true,
+                            "bindings": [],
+                            "type": "dom/get-document"
+                        },
+                        {
+                            "id": "ad3b05ac-807a-4843-a3a1-375675105584",
+                            "enabled": true,
+                            "bindings": [
+                                {
+                                    "name": "definitionId",
+                                    "binding": "definitionId"
+                                }
+                            ],
+                            "definitionId": null,
+                            "type": "other/use"
+                        }
+                    ]
+                },
+                "type": "value/set-path"
+            },
+            {
+                "id": "984aae83-e922-477c-a296-e29b8eed9015",
                 "enabled": true,
                 "bindings": [],
                 "pipelineCondition": {
-                    "id": "8b728b62-1d4a-493e-a385-fcbe800b4e8a",
+                    "id": "9af34d31-bcef-41a5-8542-09d7871a7602",
                     "pipes": [
                         {
-                            "id": "9c6fd0ca-ef51-459d-9e1d-cc20032b306c",
+                            "id": "0440fa45-fded-4dd7-9a27-824ed892926c",
+                            "enabled": true,
+                            "bindings": [],
+                            "path": "/input",
+                            "optional": false,
+                            "type": "value/get-path"
+                        },
+                        {
+                            "id": "7163901f-a24c-4424-ae86-de17532af182",
                             "enabled": true,
                             "bindings": [
                                 {
@@ -27,54 +73,88 @@
                     ]
                 },
                 "pipelinePositive": {
-                    "id": "e701fb23-827e-43ae-b91d-e5944010b831",
+                    "id": "5e9572c8-8192-4051-b4e6-bca37e0dc0cb",
                     "pipes": [
                         {
-                            "id": "cee5d0b4-b7d9-4c79-92cb-1e5682c399f4",
+                            "id": "5917c89f-a89b-4de2-999d-526b00977daf",
                             "enabled": true,
                             "bindings": [],
-                            "type": "dom/get-document"
-                        },
-                        {
-                            "id": "d8c63ea9-492f-4e14-b03b-0073568700ae",
-                            "enabled": true,
-                            "bindings": [
+                            "mappings": [
                                 {
-                                    "name": "definitionId",
-                                    "binding": "definitionId"
+                                    "path": "/value",
+                                    "value": "=0"
+                                },
+                                {
+                                    "path": "/currencyCode",
+                                    "value": "/reference/currencyCode"
                                 }
                             ],
-                            "definitionId": null,
-                            "type": "other/use"
-                        },
-                        {
-                            "id": "ebd9873f-59e7-434f-b9c1-75d22e1351fb",
-                            "enabled": true,
-                            "bindings": [],
-                            "path": "/value",
-                            "onNull": "bypass",
-                            "pipeline": {
-                                "id": "968cd261-b944-40f3-8f53-b78383ba86fb",
-                                "pipes": [
-                                    {
-                                        "id": "d06cc6d7-db37-42e9-8259-d8d32c583678",
-                                        "enabled": true,
-                                        "bindings": [],
-                                        "value": "0",
-                                        "dataType": "number",
-                                        "type": "value/get-constant"
-                                    }
-                                ]
-                            },
-                            "type": "value/set-path"
+                            "mode": "replace",
+                            "type": "value/compose"
                         }
                     ]
                 },
                 "pipelineNegative": {
-                    "id": "b8f6d413-65ec-43f0-8de8-a30201ee0d61",
+                    "id": "d2ca75cb-8d51-47f8-a29a-6805f44fbc0d",
                     "pipes": [
                         {
-                            "id": "46e13906-db61-4d44-b34a-df7fb039013b",
+                            "id": "7a52e16a-cb33-47c3-b771-06fddaadc8c8",
+                            "enabled": true,
+                            "bindings": [],
+                            "pipelineCondition": {
+                                "id": "39ccbdd7-2954-432d-9d47-8e7d2c51b555",
+                                "pipes": [
+                                    {
+                                        "id": "a1a74f57-960c-4ee1-8ef7-73366ae18f46",
+                                        "enabled": true,
+                                        "bindings": [],
+                                        "mode": "value",
+                                        "expression": "return ctx.resolveParam('addSymbol');",
+                                        "type": "other/javascript"
+                                    }
+                                ]
+                            },
+                            "pipelinePositive": {
+                                "id": "a2d3982f-30b7-4df4-8e3e-051390fb5eb2",
+                                "pipes": [
+                                    {
+                                        "id": "de1d54fe-cad5-4fab-8c95-a2c01ea3798b",
+                                        "enabled": true,
+                                        "bindings": [],
+                                        "path": "/input",
+                                        "onNull": "bypass",
+                                        "pipeline": {
+                                            "id": "c5a6d04c-aca1-42bb-b9de-dae47549fce2",
+                                            "pipes": [
+                                                {
+                                                    "id": "de68ca6c-bca4-464f-ae3d-11941eea426a",
+                                                    "enabled": true,
+                                                    "bindings": [],
+                                                    "template": "{/input} {/reference/currencyCode}",
+                                                    "type": "value/format-template"
+                                                }
+                                            ]
+                                        },
+                                        "type": "value/set-path"
+                                    }
+                                ]
+                            },
+                            "pipelineNegative": {
+                                "id": "516e5ecd-0073-40c6-a411-65d65cda1842",
+                                "pipes": []
+                            },
+                            "type": "other/if-else"
+                        },
+                        {
+                            "id": "b11ed5bc-70aa-42fc-90f2-fe66891335ed",
+                            "enabled": true,
+                            "bindings": [],
+                            "path": "/input",
+                            "optional": false,
+                            "type": "value/get-path"
+                        },
+                        {
+                            "id": "8c11ea2a-2b66-481b-af28-4e438217d2b3",
                             "enabled": true,
                             "bindings": [],
                             "optional": false,
@@ -88,7 +168,6 @@
             }
         ]
     },
-    "sha": null,
     "params": [
         {
             "name": "zeroPriceRegexp",
@@ -100,6 +179,12 @@
             "label": "Reference Price Definition",
             "type": "definition",
             "value": null
+        },
+        {
+            "name": "addSymbol",
+            "label": "Add currency symbol",
+            "type": "boolean",
+            "value": false
         }
     ]
 }
