@@ -10,7 +10,7 @@
                 "enabled": true,
                 "bindings": [],
                 "mode": "collection",
-                "expression": "const sum = inputSet.reduce((sum, el) => {\n  const num = parseFloat(el.value) || 0;\n  return num + sum;\n}, 0);\nconst el = await ctx.pipe.getDocumentElement(sum);\nreturn [\n    el\n];",
+                "expression": "const sum = inputSet.reduce((sum, el) => {\n  const num = parseFloat(el.value) || 0;\n  return num + sum;\n}, 0);\nconst el = await ctx.createDocument(sum);\nreturn [\n    el\n];",
                 "type": "other/javascript"
             }
         ]
