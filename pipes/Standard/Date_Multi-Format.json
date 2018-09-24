@@ -1,23 +1,10 @@
 {
-    "id": "cc6c0676-38a2-490a-9650-b80e38f1c4e7",
+    "id": "31901baa-d9fa-4e08-97cd-c651c8245605",
     "label": "Date Multi-Format",
-    "pipeline": {
-        "id": "2b3388f4-4a6d-4ee5-825a-8504fb867c33",
-        "pipes": [
-            {
-                "id": "8f1b3fba-6072-4bca-abcf-c83ac7cb3a4e",
-                "enabled": true,
-                "bindings": [],
-                "mode": "value",
-                "expression": "const formats = ctx.resolveParam('formats');\nfor (const fmt of formats) {\n  \n  const val = ctx.moment.utc(value, fmt.format, false);\n  if (val.isValid()) {\n    return val.format('YYYY-MM-DD HH:mm:ss');\n\t}\n}\nreturn null;",
-                "type": "other/javascript"
-            }
-        ]
-    },
-    "sha": null,
     "params": [
         {
             "name": "formats",
+            "label": "Input formats",
             "singular": "format",
             "type": "recordset",
             "value": [],
@@ -29,6 +16,31 @@
                     "placeholder": "YYYY-MM-DD HH:mm:ss"
                 }
             ]
+        },
+        {
+            "name": "strict",
+            "label": "Strict",
+            "type": "boolean",
+            "value": false
         }
-    ]
+    ],
+    "pipeline": {
+        "id": "685a12bc-8ffc-47b6-84b9-8fc46b5ec00c",
+        "pipes": [
+            {
+                "id": "57202655-b8da-4673-ba9f-d98783ccdbf7",
+                "enabled": true,
+                "bindings": [],
+                "mode": "value",
+                "expression": "const formats = ctx.resolveParam('formats');\nconst strict = ctx.resolveParam('strict');\nfor (const fmt of formats) {\n  const val = ctx.moment.utc(value, fmt.format, strict);\n  if (val.isValid()) {\n    return val.format('YYYY-MM-DD HH:mm:ss');\n\t}\n}\nthrow ctx.createError({\n  code: 'DateFormatFailed',\n  message: 'String does not match any of the input date formats',\n  retry: true\n});",
+                "type": "other/javascript"
+            }
+        ]
+    },
+    "integrity": {
+        "group": "Standard",
+        "filename": "Date_Multi-Format.json",
+        "sha": "50fc2b92c53ef212477790016821d84a2b346ee4",
+        "hash": "7c16398010669d542e46241013add3b91ea8755f"
+    }
 }
