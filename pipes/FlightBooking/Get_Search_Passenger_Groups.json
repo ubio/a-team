@@ -1,63 +1,6 @@
 {
-    "id": "202757ea-035a-4e55-abf6-787ef754550c",
+    "id": "62e05297-9f23-40d3-95e3-2ec6aa4730b1",
     "label": "Get Search Passenger Groups",
-    "pipeline": {
-        "id": "9da60d73-0474-41f9-a12b-2d2fb65fd31f",
-        "pipes": [
-            {
-                "id": "0d54eaf7-0b1c-4a34-8f0e-92f06014b094",
-                "enabled": true,
-                "bindings": [],
-                "inputKey": "search",
-                "type": "value/get-input"
-            },
-            {
-                "id": "80d7180b-339c-40d2-8b63-3baa1292b3c7",
-                "enabled": true,
-                "bindings": [],
-                "path": "/passengerAges",
-                "optional": false,
-                "type": "value/get-path"
-            },
-            {
-                "id": "50f5f5d6-c6b4-4f8c-89e6-6d5c535ce222",
-                "enabled": true,
-                "bindings": [],
-                "type": "other/unfold-array"
-            },
-            {
-                "id": "b5dd12dd-3fd1-4dad-9405-f45fc3bfdbf0",
-                "enabled": true,
-                "bindings": [
-                    {
-                        "name": "ranges",
-                        "binding": "ranges"
-                    }
-                ],
-                "ranges": null,
-                "type": "value/map-range"
-            },
-            {
-                "id": "e160c63e-f0d7-4132-b472-5eab63d30cb8",
-                "enabled": true,
-                "bindings": [],
-                "pipeline": {
-                    "id": "97dd442a-b892-4377-98b5-80ac3f5f82a8",
-                    "pipes": []
-                },
-                "type": "other/fold-count"
-            },
-            {
-                "id": "4d5f42c5-ed19-4d02-bb3e-def5e33586eb",
-                "enabled": true,
-                "bindings": [],
-                "mode": "value",
-                "expression": "const ranges = ctx.resolveParam('ranges');\nconst newValue = JSON.parse(JSON.stringify(value));\nfor (const rng of ranges) {\n  const key = rng.value;\n  if (!newValue[key]) {\n    newValue[key] = 0;\n  }\n}\nreturn newValue;",
-                "type": "other/javascript"
-            }
-        ]
-    },
-    "sha": null,
     "params": [
         {
             "name": "ranges",
@@ -102,5 +45,67 @@
                 }
             ]
         }
-    ]
+    ],
+    "pipeline": {
+        "id": "aba958c6-c570-4b70-a284-50c20d27c7bb",
+        "pipes": [
+            {
+                "id": "d498473a-8a32-407b-895f-b726e2664abe",
+                "enabled": true,
+                "bindings": [],
+                "inputKey": "search",
+                "type": "value/get-input"
+            },
+            {
+                "id": "061b788e-dd3c-4fd8-b1bc-a14391bdc2ef",
+                "enabled": true,
+                "bindings": [],
+                "path": "/passengerAges",
+                "optional": false,
+                "type": "value/get-path"
+            },
+            {
+                "id": "3bdc4987-ca24-498b-9d5c-41b08258d741",
+                "enabled": true,
+                "bindings": [],
+                "type": "other/unfold-array"
+            },
+            {
+                "id": "3e53b283-c606-4152-bd69-bacd0839a3d7",
+                "enabled": true,
+                "bindings": [
+                    {
+                        "name": "ranges",
+                        "binding": "ranges"
+                    }
+                ],
+                "ranges": null,
+                "type": "value/map-range"
+            },
+            {
+                "id": "acdeef05-e996-4b68-b36a-ad74ed3ed27f",
+                "enabled": true,
+                "bindings": [],
+                "pipeline": {
+                    "id": "d7ab022b-ef3b-4190-a4a0-ed52b0f609a7",
+                    "pipes": []
+                },
+                "type": "other/fold-count"
+            },
+            {
+                "id": "69e968f0-c63f-4e8a-8741-7e96cbecfd60",
+                "enabled": true,
+                "bindings": [],
+                "mode": "collection",
+                "expression": "const ranges = ctx.resolveParam('ranges');\nconst newEls = [];\nfor (const el of inputSet) {\n  const records = [];\n  for (const rng of ranges) {\n    const key = rng.value;\n    records.push({ group: key, count: el.value[key] || 0 });\n  }\n  newEls.push(...records.map(r => el.clone(r)));\n};\nreturn newEls;",
+                "type": "other/javascript"
+            }
+        ]
+    },
+    "integrity": {
+        "group": "FlightBooking",
+        "filename": "Get_Search_Passenger_Groups.json",
+        "sha": "7a3e681a43db04f34dddb9e7ab141380711ac567",
+        "hash": "d67ecf8737e04d8c361e440c2f0ac1a6c658d5b0"
+    }
 }
