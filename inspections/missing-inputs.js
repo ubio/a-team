@@ -18,7 +18,7 @@ function* inspect(script, domain) {
     if (missingInputs.length) {
         yield {
             level: 'warning',
-            message: 'Unconsumed inputs',
+            message: 'Missing inputs',
             details: {
                 keys: missingInputs
             }
