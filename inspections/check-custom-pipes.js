@@ -8,7 +8,7 @@ module.exports = {
 };
 
 function* inspect(action) {
-    for (const pipe of action.allPipes()) {
+    for (const pipe of action.descendentPipes()) {
         if (pipe.type !== 'other/custom') {
             continue;
         }

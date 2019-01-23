@@ -13,7 +13,7 @@ function* inspect(action) {
     if (action.type !== 'matcher') {
         return;
     }
-    for (const pipe of action.allPipes()) {
+    for (const pipe of action.descendentPipes()) {
         if (pipeTypes.includes(pipe.type)) {
             yield {
                 level: 'error',
