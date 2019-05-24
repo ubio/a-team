@@ -1,0 +1,64 @@
+{
+    "id": "8e18a137-52c0-49c5-aafa-aa5bdbc59305",
+    "label": "Contains Any Text",
+    "params": [
+        {
+            "value": null,
+            "name": "definitionId",
+            "type": "definition",
+            "label": "Definition Id"
+        }
+    ],
+    "pipeline": {
+        "id": "9dad7506-f215-421a-b730-d1fdf7ddd6ee",
+        "pipes": [
+            {
+                "id": "fd3e2715-1cb3-4ae2-8ec7-3ada96c069cb",
+                "enabled": true,
+                "bindings": [],
+                "key": "foo",
+                "type": "other/set-local"
+            },
+            {
+                "id": "180dfc70-cef3-466c-9494-fd2ebfa0a4c4",
+                "enabled": true,
+                "bindings": [
+                    {
+                        "name": "definitionId",
+                        "binding": "definitionId"
+                    }
+                ],
+                "definitionId": "",
+                "type": "other/use"
+            },
+            {
+                "id": "819703ef-10ae-457f-a37d-affcc420e13e",
+                "enabled": true,
+                "bindings": [],
+                "pipelineA": {
+                    "id": "9c8fd008-2e65-4ec2-bb52-df755fa2bf81",
+                    "pipes": [
+                        {
+                            "id": "d7fcb9ee-a28a-45e2-9922-7c0542ab7b58",
+                            "enabled": true,
+                            "bindings": [],
+                            "key": "foo",
+                            "type": "other/get-local"
+                        }
+                    ]
+                },
+                "pipelineB": {
+                    "id": "b96db31e-8f72-496b-8699-e5ff9d549b03",
+                    "pipes": []
+                },
+                "type": "value/contains"
+            },
+            {
+                "id": "ff1e43dc-92bd-46c6-aa5f-cf91986a209c",
+                "enabled": true,
+                "bindings": [],
+                "type": "other/fold-any"
+            }
+        ]
+    }
+}

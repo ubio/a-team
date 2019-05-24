@@ -36,11 +36,5 @@
                 "type": "other/javascript"
             }
         ]
-    },
-    "integrity": {
-        "group": "Standard",
-        "filename": "Date_Multi-Format.json",
-        "sha": "50fc2b92c53ef212477790016821d84a2b346ee4",
-        "hash": "7c16398010669d542e46241013add3b91ea8755f"
     }
 }
