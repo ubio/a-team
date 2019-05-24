@@ -17,7 +17,7 @@
                 "enabled": true,
                 "bindings": [],
                 "key": "foo",
-                "type": "other/set-local"
+                "type": "other/local-save"
             },
             {
                 "id": "180dfc70-cef3-466c-9494-fd2ebfa0a4c4",
@@ -43,7 +43,7 @@
                             "enabled": true,
                             "bindings": [],
                             "key": "foo",
-                            "type": "other/get-local"
+                            "type": "other/local-restore"
                         }
                     ]
                 },
