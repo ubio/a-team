@@ -1,19 +1,20 @@
 {
-    "id": "ebe7428f-b794-4afa-9ed4-bc1e51e5aca4",
     "label": "Filter Query Exists",
-    "description": "Keeps the elements which contain a visible child element queried by the defined selector.",
+    "params": [
+        {
+            "name": "selector",
+            "type": "selector",
+            "value": ""
+        }
+    ],
     "pipeline": {
-        "id": "a792ee31-31b7-4e4c-84cb-227fdfb36a0b",
         "pipes": [
             {
-                "id": "60a60ab3-4bcf-4cbb-bf02-5eea695d1c90",
                 "enabled": true,
                 "bindings": [],
                 "pipeline": {
-                    "id": "ccc7d231-1dfd-4e4b-bd0a-bc6b40a79874",
                     "pipes": [
                         {
-                            "id": "feeae477-fd32-49ee-b522-e4f31f423cd4",
                             "enabled": true,
                             "bindings": [
                                 {
@@ -21,19 +22,16 @@
                                     "binding": "selector"
                                 }
                             ],
-                            "selector": null,
+                            "selector": "",
                             "optional": true,
                             "type": "dom/query-all"
                         },
                         {
-                            "id": "6d4bcb3e-fac8-4a62-a0be-58cd72fccf45",
                             "enabled": true,
                             "bindings": [],
                             "pipeline": {
-                                "id": "d1f0a581-3b0e-4fd1-a1f8-ad95da587f7b",
                                 "pipes": [
                                     {
-                                        "id": "467ae5d0-2efe-4510-ac03-3b7fe5a985c8",
                                         "enabled": true,
                                         "bindings": [],
                                         "type": "dom/is-visible"
@@ -43,7 +41,6 @@
                             "type": "other/filter"
                         },
                         {
-                            "id": "d76f055c-00fe-4ee2-aba0-3230d12a4bf7",
                             "enabled": true,
                             "bindings": [],
                             "type": "other/fold-exists"
@@ -53,13 +50,5 @@
                 "type": "other/filter"
             }
         ]
-    },
-    "sha": null,
-    "params": [
-        {
-            "name": "selector",
-            "type": "selector",
-            "value": ""
-        }
-    ]
+    }
 }

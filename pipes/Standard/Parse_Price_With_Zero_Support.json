@@ -1,5 +1,4 @@
 {
-    "id": "fb9ce25b-d464-4d1c-936d-87d86322de4b",
     "label": "Parse Price With Zero Support",
     "params": [
         {
@@ -27,32 +26,26 @@
         }
     ],
     "pipeline": {
-        "id": "fc4dc312-d369-40e6-9a21-b1f6194c5040",
         "pipes": [
             {
-                "id": "903fe456-449a-452f-99cb-11f4618fffc5",
                 "enabled": true,
                 "bindings": [],
                 "path": "/input",
                 "type": "value/wrap"
             },
             {
-                "id": "c506039b-9c2e-43bd-9e9d-37c6f6e92b53",
                 "enabled": true,
                 "bindings": [],
                 "path": "/reference",
                 "onNull": "bypass",
                 "pipeline": {
-                    "id": "3ccc367c-b04f-4dfd-8d4c-8a6eb0f465cf",
                     "pipes": [
                         {
-                            "id": "9fdd9dcc-8fce-444b-93db-639dbcab7657",
                             "enabled": true,
                             "bindings": [],
                             "type": "dom/get-document"
                         },
                         {
-                            "id": "ec9cc22c-05a0-4468-8586-0ad3333df851",
                             "enabled": true,
                             "bindings": [
                                 {
@@ -60,7 +53,7 @@
                                     "binding": "definitionId"
                                 }
                             ],
-                            "definitionId": null,
+                            "definitionId": "",
                             "type": "other/use"
                         }
                     ]
@@ -68,14 +61,11 @@
                 "type": "value/set-path"
             },
             {
-                "id": "a1335c11-3451-40b4-a04e-3575439677bc",
                 "enabled": true,
                 "bindings": [],
                 "pipelineCondition": {
-                    "id": "02d06961-97bb-4496-a716-aeb2bdf2fd47",
                     "pipes": [
                         {
-                            "id": "65dbaacd-3272-4eef-9974-a55c4b2bb624",
                             "enabled": true,
                             "bindings": [],
                             "path": "/input",
@@ -83,7 +73,6 @@
                             "type": "value/get-path"
                         },
                         {
-                            "id": "38058d17-1e63-4297-b6fc-451831c55f8f",
                             "enabled": true,
                             "bindings": [
                                 {
@@ -91,17 +80,15 @@
                                     "binding": "zeroPriceRegexp"
                                 }
                             ],
-                            "regexp": null,
+                            "regexp": "",
                             "caseInsensitive": true,
                             "type": "value/matches-regexp"
                         }
                     ]
                 },
                 "pipelinePositive": {
-                    "id": "23a7a0f4-dea2-47ab-85cf-3ff524f36568",
                     "pipes": [
                         {
-                            "id": "20cf2bfe-af6d-4aac-b6bb-880f8a3b9826",
                             "enabled": true,
                             "bindings": [],
                             "mappings": [
@@ -120,17 +107,13 @@
                     ]
                 },
                 "pipelineNegative": {
-                    "id": "827f8ab1-fe09-405e-a5e8-d7684d4dd589",
                     "pipes": [
                         {
-                            "id": "6560a4df-e098-43d2-910f-b6691be72f4a",
                             "enabled": true,
                             "bindings": [],
                             "pipelineCondition": {
-                                "id": "5209943e-71f6-44a4-9028-64988f1462f2",
                                 "pipes": [
                                     {
-                                        "id": "52bd992f-f1af-48c9-9137-698200b75736",
                                         "enabled": true,
                                         "bindings": [],
                                         "mode": "value",
@@ -140,19 +123,15 @@
                                 ]
                             },
                             "pipelinePositive": {
-                                "id": "18613b1e-97da-46db-af81-d60ddf894439",
                                 "pipes": [
                                     {
-                                        "id": "a56f04e4-2deb-4f7e-b2c4-0e2ba4f7560f",
                                         "enabled": true,
                                         "bindings": [],
                                         "path": "/input",
                                         "onNull": "bypass",
                                         "pipeline": {
-                                            "id": "a0ea69c5-8cda-4a8d-9457-d3f14e95d8c7",
                                             "pipes": [
                                                 {
-                                                    "id": "e4c17807-0e0a-47d4-aa86-d207231cb343",
                                                     "enabled": true,
                                                     "bindings": [],
                                                     "template": "{/input} {/reference/currencyCode}",
@@ -165,13 +144,11 @@
                                 ]
                             },
                             "pipelineNegative": {
-                                "id": "5df90ea5-f40d-4a3b-869b-b11f96403c38",
                                 "pipes": []
                             },
                             "type": "other/if-else"
                         },
                         {
-                            "id": "9a7f373f-3c5b-492e-97cb-0e75a1ab7e80",
                             "enabled": true,
                             "bindings": [],
                             "path": "/input",
@@ -179,7 +156,6 @@
                             "type": "value/get-path"
                         },
                         {
-                            "id": "6d322678-0a36-472f-9d65-b0f932f87c1f",
                             "enabled": true,
                             "bindings": [
                                 {
@@ -188,7 +164,7 @@
                                 }
                             ],
                             "optional": false,
-                            "exponent": null,
+                            "exponent": 0,
                             "allowNegative": false,
                             "type": "value/parse-price"
                         }
@@ -197,11 +173,5 @@
                 "type": "other/if-else"
             }
         ]
-    },
-    "integrity": {
-        "group": "Standard",
-        "filename": "Parse_Price_With_Zero_Support.json",
-        "sha": "8c99b516bf64616a63daca4fca6bafa3b28de026",
-        "hash": "9319c7648e47a30e3360751835779aa73ab7afbe"
     }
 }

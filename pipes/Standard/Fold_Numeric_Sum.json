@@ -1,12 +1,9 @@
 {
-    "id": "0ac1726d-90e1-489e-b2f3-b49264a4733a",
     "label": "Fold Numeric Sum",
-    "description": "Folds input set into a single number, which is a numeric sum of all input values. Non-numeric values are coerced to 0.",
+    "params": [],
     "pipeline": {
-        "id": "97fe22a1-2751-4f25-a414-7ed0a360d57f",
         "pipes": [
             {
-                "id": "f24764ff-ae48-432a-b600-e92680943a3d",
                 "enabled": true,
                 "bindings": [],
                 "mode": "collection",
@@ -14,7 +11,5 @@
                 "type": "other/javascript"
             }
         ]
-    },
-    "sha": null,
-    "params": []
+    }
 }

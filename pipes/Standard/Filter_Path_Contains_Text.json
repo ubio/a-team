@@ -1,48 +1,5 @@
 {
-    "id": "f91ce122-02b5-440c-8623-8e576e39153a",
     "label": "Filter Path Contains Text",
-    "pipeline": {
-        "id": "9eda1934-4876-4029-ad83-24be26335e53",
-        "pipes": [
-            {
-                "id": "01144478-83ca-47eb-ad60-c5e2217e1901",
-                "enabled": true,
-                "bindings": [],
-                "pipeline": {
-                    "id": "8e20b061-916c-4f53-bd83-b9977c53314d",
-                    "pipes": [
-                        {
-                            "id": "0baed62f-5bb2-47b8-bd96-b9e51102a516",
-                            "enabled": true,
-                            "bindings": [
-                                {
-                                    "name": "path",
-                                    "binding": "path"
-                                }
-                            ],
-                            "path": null,
-                            "optional": true,
-                            "type": "value/get-path"
-                        },
-                        {
-                            "id": "83e8ef89-7ca3-4f30-a0be-962499a9d349",
-                            "enabled": true,
-                            "bindings": [
-                                {
-                                    "name": "text",
-                                    "binding": "text"
-                                }
-                            ],
-                            "text": null,
-                            "type": "value/contains-text"
-                        }
-                    ]
-                },
-                "type": "other/filter"
-            }
-        ]
-    },
-    "sha": null,
     "params": [
         {
             "name": "path",
@@ -55,5 +12,41 @@
             "type": "string",
             "value": ""
         }
-    ]
+    ],
+    "pipeline": {
+        "pipes": [
+            {
+                "enabled": true,
+                "bindings": [],
+                "pipeline": {
+                    "pipes": [
+                        {
+                            "enabled": true,
+                            "bindings": [
+                                {
+                                    "name": "path",
+                                    "binding": "path"
+                                }
+                            ],
+                            "path": "",
+                            "optional": true,
+                            "type": "value/get-path"
+                        },
+                        {
+                            "enabled": true,
+                            "bindings": [
+                                {
+                                    "name": "text",
+                                    "binding": "text"
+                                }
+                            ],
+                            "text": "",
+                            "type": "value/contains-text"
+                        }
+                    ]
+                },
+                "type": "other/filter"
+            }
+        ]
+    }
 }

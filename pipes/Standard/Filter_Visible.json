@@ -1,18 +1,14 @@
 {
-    "id": "2a4f0058-cce4-4da2-9450-b75aed0fc793",
     "label": "Filter Visible",
+    "params": [],
     "pipeline": {
-        "id": "a7551a4b-c95b-4fb9-b5f2-b7beebda4e7c",
         "pipes": [
             {
-                "id": "abee3e8e-639a-4ad1-a4fc-8a445d9b8716",
                 "enabled": true,
                 "bindings": [],
                 "pipeline": {
-                    "id": "26a1f5b1-e2ab-4bec-99f8-d6bb2331e47c",
                     "pipes": [
                         {
-                            "id": "406b1a66-3854-4f65-8358-c7452c19f77b",
                             "enabled": true,
                             "bindings": [],
                             "type": "dom/is-visible"
@@ -22,7 +18,5 @@
                 "type": "other/filter"
             }
         ]
-    },
-    "sha": null,
-    "params": []
+    }
 }

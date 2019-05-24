@@ -1,5 +1,4 @@
 {
-    "id": "31901baa-d9fa-4e08-97cd-c651c8245605",
     "label": "Date Multi-Format",
     "params": [
         {
@@ -25,10 +24,8 @@
         }
     ],
     "pipeline": {
-        "id": "685a12bc-8ffc-47b6-84b9-8fc46b5ec00c",
         "pipes": [
             {
-                "id": "57202655-b8da-4673-ba9f-d98783ccdbf7",
                 "enabled": true,
                 "bindings": [],
                 "mode": "value",

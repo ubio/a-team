@@ -1,18 +1,20 @@
 {
-    "id": "f91ce122-02b5-440c-8623-8e576e39153a",
     "label": "Filter Equals Text",
+    "params": [
+        {
+            "name": "text",
+            "type": "string",
+            "value": ""
+        }
+    ],
     "pipeline": {
-        "id": "9eda1934-4876-4029-ad83-24be26335e53",
         "pipes": [
             {
-                "id": "01144478-83ca-47eb-ad60-c5e2217e1901",
                 "enabled": true,
                 "bindings": [],
                 "pipeline": {
-                    "id": "8e20b061-916c-4f53-bd83-b9977c53314d",
                     "pipes": [
                         {
-                            "id": "c7a4afa2-5b1a-49eb-a06e-6ee192c56b9e",
                             "enabled": true,
                             "bindings": [
                                 {
@@ -20,7 +22,7 @@
                                     "binding": "text"
                                 }
                             ],
-                            "text": null,
+                            "text": "",
                             "type": "value/equals-text"
                         }
                     ]
@@ -28,13 +30,5 @@
                 "type": "other/filter"
             }
         ]
-    },
-    "sha": null,
-    "params": [
-        {
-            "name": "text",
-            "type": "string",
-            "value": ""
-        }
-    ]
+    }
 }

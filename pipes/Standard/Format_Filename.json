@@ -1,97 +1,5 @@
 {
-    "id": "9a687b6a-722a-41c3-ad57-c40126537d6a",
     "label": "Format Filename",
-    "pipeline": {
-        "id": "40106948-ae20-42b3-b609-c5480518e83f",
-        "pipes": [
-            {
-                "id": "8e62ef68-ec1c-4430-99c4-8eb27d86be6c",
-                "enabled": true,
-                "bindings": [],
-                "regexp": "\\s+",
-                "flags": "ig",
-                "replacement": "_",
-                "type": "value/replace"
-            },
-            {
-                "id": "5a0bf992-8538-4ba0-8100-44c5d38e652f",
-                "enabled": true,
-                "bindings": [],
-                "regexp": "[^A-Za-z0-9_-]+",
-                "flags": "ig",
-                "replacement": "_",
-                "type": "value/replace"
-            },
-            {
-                "id": "881b25a5-dfb9-419a-99c0-3a9c18743a97",
-                "enabled": true,
-                "bindings": [],
-                "regexp": "_+",
-                "flags": "ig",
-                "replacement": "_",
-                "type": "value/replace"
-            },
-            {
-                "id": "aa911c8e-5afc-49ff-83f2-26eb103ccd21",
-                "enabled": true,
-                "bindings": [],
-                "regexp": "^_+|_+$",
-                "flags": "ig",
-                "replacement": "",
-                "type": "value/replace"
-            },
-            {
-                "id": "27355ac1-cf35-4703-8bdf-42610f08de43",
-                "enabled": true,
-                "bindings": [],
-                "path": "/basename",
-                "type": "value/wrap"
-            },
-            {
-                "id": "8194dd5d-f3ae-4609-9c0b-2d7a6847d4ae",
-                "enabled": true,
-                "bindings": [],
-                "path": "/extname",
-                "onNull": "bypass",
-                "pipeline": {
-                    "id": "89a8f91b-411c-4af7-98f5-37bd7ba0e24d",
-                    "pipes": [
-                        {
-                            "id": "f524480e-43d7-4b86-99ce-33f10855baaf",
-                            "enabled": true,
-                            "bindings": [
-                                {
-                                    "name": "value",
-                                    "binding": "extension"
-                                }
-                            ],
-                            "value": null,
-                            "dataType": "string",
-                            "type": "value/get-constant"
-                        },
-                        {
-                            "id": "35de4380-4534-426e-a9a5-6a44008fad38",
-                            "enabled": true,
-                            "bindings": [],
-                            "regexp": ".*\\.",
-                            "flags": "ig",
-                            "replacement": "",
-                            "type": "value/replace"
-                        }
-                    ]
-                },
-                "type": "value/set-path"
-            },
-            {
-                "id": "470ed65a-f95c-42df-b8b2-abc17c4784a9",
-                "enabled": true,
-                "bindings": [],
-                "template": "{/basename}.{/extname}",
-                "type": "value/format-template"
-            }
-        ]
-    },
-    "sha": null,
     "params": [
         {
             "name": "extension",
@@ -99,5 +7,84 @@
             "placeholder": "pdf",
             "value": "html"
         }
-    ]
+    ],
+    "pipeline": {
+        "pipes": [
+            {
+                "enabled": true,
+                "bindings": [],
+                "regexp": "\\s+",
+                "replacement": "_",
+                "caseInsensitive": true,
+                "type": "value/replace-regexp"
+            },
+            {
+                "enabled": true,
+                "bindings": [],
+                "regexp": "[^A-Za-z0-9_-]+",
+                "replacement": "_",
+                "caseInsensitive": true,
+                "type": "value/replace-regexp"
+            },
+            {
+                "enabled": true,
+                "bindings": [],
+                "regexp": "_+",
+                "replacement": "_",
+                "caseInsensitive": true,
+                "type": "value/replace-regexp"
+            },
+            {
+                "enabled": true,
+                "bindings": [],
+                "regexp": "^_+|_+$",
+                "replacement": "",
+                "caseInsensitive": true,
+                "type": "value/replace-regexp"
+            },
+            {
+                "enabled": true,
+                "bindings": [],
+                "path": "/basename",
+                "type": "value/wrap"
+            },
+            {
+                "enabled": true,
+                "bindings": [],
+                "path": "/extname",
+                "onNull": "bypass",
+                "pipeline": {
+                    "pipes": [
+                        {
+                            "enabled": true,
+                            "bindings": [
+                                {
+                                    "name": "value",
+                                    "binding": "extension"
+                                }
+                            ],
+                            "value": "",
+                            "dataType": "string",
+                            "type": "value/get-constant"
+                        },
+                        {
+                            "enabled": true,
+                            "bindings": [],
+                            "regexp": ".*\\.",
+                            "replacement": "",
+                            "caseInsensitive": true,
+                            "type": "value/replace-regexp"
+                        }
+                    ]
+                },
+                "type": "value/set-path"
+            },
+            {
+                "enabled": true,
+                "bindings": [],
+                "template": "{/basename}.{/extname}",
+                "type": "value/format-template"
+            }
+        ]
+    }
 }
