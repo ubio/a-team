@@ -14,7 +14,7 @@
         },
         {
             "name": "addSymbol",
-            "label": "Add currency symbol",
+            "label": "Add currency from definition",
             "type": "boolean",
             "value": false
         },
