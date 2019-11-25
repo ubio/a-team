@@ -1,0 +1,50 @@
+{
+    "id": "1d7f8509-89db-45fa-a0fa-4b1466215d13",
+    "label": "Room Price Breakdown",
+    "params": [
+        {
+            "value": 9.9,
+            "name": "vat",
+            "type": "number",
+            "label": "Vat (%)"
+        },
+        {
+            "value": 0,
+            "name": "touristTaxPerRoom",
+            "type": "number",
+            "label": "Tourist Tax Per Room (%)"
+        },
+        {
+            "value": 0,
+            "name": "touristTaxPerPerson",
+            "type": "number",
+            "label": "Tourist Tax Per Person (%)"
+        },
+        {
+            "value": 0,
+            "name": "touristTaxPerAdult",
+            "type": "number",
+            "label": "Tourist Tax Per Adult (%)"
+        },
+        {
+            "value": false,
+            "name": "touristTaxIncluded",
+            "type": "boolean",
+            "label": "Tourist Tax Included?"
+        }
+    ],
+    "pipeline": {
+        "id": "1a5de513-af1d-46d8-b91a-54a1e621a492",
+        "pipes": [
+            {
+                "id": "633baf6b-32d1-455e-9b98-ce25b8e92ffe",
+                "enabled": true,
+                "bindings": [],
+                "mode": "element",
+                "expression": "const { hotelId, search, price } = el.value;\nctx.checkType(hotelId, 'string', 'hotelId');\nctx.checkType(price, 'object', 'price');\nctx.checkType(price.value, 'number', 'price.value');\nctx.checkType(price.currencyCode, 'string', 'price.currencyCode');\nctx.checkType(search, 'object', 'search');\nctx.checkType(search.checkInDate, 'string', 'search.checkInDate');\nctx.checkType(search.checkOutDate, 'string', 'search.checkOutDate');\nctx.checkType(search.rooms, 'array', 'search.rooms');\nconst priceBreakdown = await calcPriceBreakdown({ hotelId, price, search });\nreturn el.clone(priceBreakdown);\n\nasync function calcPriceBreakdown({ hotelId, price, search }) {\n  const taxInfo = await lookupTaxInfo(hotelId);\n  const { adults, persons } = calcParty(search);\n  const vatRate = Math.round(price.value * taxInfo.vat / 100);\n  const touristTaxRoom = price.value * taxInfo.touristTaxPerRoom / 100;\n  const touristTaxAdults = price.value * taxInfo.touristTaxPerAdult * adults / 100;\n  const touristTaxPersons = price.value * taxInfo.touristTaxPerPerson * persons / 100;\n  const touristTax = Math.round(touristTaxAdults + touristTaxPersons + touristTaxRoom);\n  const roomNetRate = Math.round(price.value - vatRate - (taxInfo.touristTaxIncluded ? touristTax : 0));\n  return [\n    {\n      type: 'net-rate',\n      price: { value: roomNetRate, currencyCode: price.currencyCode },\n    },\n    {\n      type: 'vat',\n      price: { value: vatRate, currencyCode: price.currencyCode },\n    },\n    {\n      type: 'city-tax',\n      price: { value: touristTax, currencyCode: price.currencyCode },\n      paidAtHotel: taxInfo.touristTaxIncluded,\n    },\n  ];\n}\n\nasync function lookupTaxInfo(hotelId) {\n  // TODO replace with real lookup and ctx-scoped cache\n  return {\n    vat: ctx.resolveParam('vat'),\n    touristTaxIncluded: ctx.resolveParam('touristTaxIncluded'),\n    touristTaxPerRoom: ctx.resolveParam('touristTaxPerRoom'),\n    touristTaxPerPerson: ctx.resolveParam('touristTaxPerPerson'),\n    touristTaxPerAdult: ctx.resolveParam('touristTaxPerAdult'),\n  };\n}\n\nfunction calcParty(search) {\n  let adults = 0;\n  let persons = 0;\n  for (const room of search.rooms) {\n    for (const age of room.ages) {\n      persons += 1;\n      if (age >= 18) {\n        adults += 1;\n      }\n    }\n  }\n  return { adults, persons };\n}",
+                "type": "other/javascript"
+            }
+        ]
+    },
+    "integrity": null
+}
