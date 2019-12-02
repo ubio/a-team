@@ -1,0 +1,71 @@
+{
+    "id": "1d7f8509-89db-45fa-a0fa-4b1466215d13",
+    "label": "Room Price Breakdown (Test)",
+    "params": [
+        {
+            "type": "recordset",
+            "name": "taxRates",
+            "label": "Tax rates",
+            "singular": "tax rate",
+            "fields": [
+                {
+                    "name": "taxType",
+                    "type": "enum",
+                    "value": "vat",
+                    "enum": [
+                        "vat",
+                        "city-tax",
+                        "hotel-fee",
+                        "resort-fee",
+                        "service-fee",
+                        "booking-fee"
+                    ]
+                },
+                {
+                    "name": "percentage",
+                    "type": "number",
+                    "value": 0
+                },
+                {
+                    "name": "pricePerAdult",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "pricePerChild",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "paidAtHotel",
+                    "type": "boolean",
+                    "value": false
+                },
+                {
+                    "name": "excludedFromTotals",
+                    "type": "boolean",
+                    "value": false
+                }
+            ]
+        }
+    ],
+    "pipeline": {
+        "id": "1a5de513-af1d-46d8-b91a-54a1e621a492",
+        "pipes": [
+            {
+                "id": "633baf6b-32d1-455e-9b98-ce25b8e92ffe",
+                "enabled": true,
+                "bindings": [],
+                "mode": "element",
+                "expression": "const { hotelId, search, price, valueAdditions } = el.value;\nctx.checkType(hotelId, 'string', 'hotelId');\nctx.checkType(price, 'object', 'price');\nctx.checkType(price.value, 'number', 'price.value');\nctx.checkType(price.currencyCode, 'string', 'price.currencyCode');\nctx.checkType(search, 'object', 'search'); \nctx.checkType(search.checkInDate, 'string', 'search.checkInDate');\nctx.checkType(search.checkOutDate, 'string', 'search.checkOutDate');\nctx.checkType(search.rooms, 'array', 'search.rooms');\n\nconst payLater = Array.isArray(valueAdditions) && valueAdditions.includes('pay-later');\nconst priceBreakdown = await calcPriceBreakdown({ hotelId, price, search, payLater });\nreturn el.clone(priceBreakdown);\n\nasync function calcPriceBreakdown({ hotelId, price, search, payLater }) {\n    const taxRates = await lookupTaxRates(hotelId);\n    const party = calcParty(search);\n    const nights = calcNights(search);\n    const taxItems = calcTaxItems(taxRates, price, party, nights, payLater);\n    let netRate = price.value;\n    for (const tax of taxItems) {\n        const included = !tax.paidAtHotel && !tax.excludedFromTotals;\n        if (included) {\n            netRate -= tax.price.value;\n        }\n    }\n    return [\n        {\n            type: 'net-rate',\n            price: {\n                value: Math.round(netRate),\n                currencyCode: price.currencyCode,\n            },\n            excludedFromTotals: false,\n          \tpaidAtHotel: payLater,\n        },\n        ...taxItems\n    ];\n}\n\nfunction calcTaxItems(taxRates, price, party, nights, payLater) {\n    const { adults, children } = party;\n    const items = [];\n    for (const taxRate of taxRates) {\n        const { taxType, excludedFromTotals, paidAtHotel } = taxRate;\n        const percentage = Number(taxRate.percentage) || 0;\n        const pricePerAdult = ctx.parsePrice(taxRate.pricePerAdult);\n        const pricePerChild = ctx.parsePrice(taxRate.pricePerChild);\n        // By default currency code is the same as in price,\n        // but can be overridden by fixed price per person\n        let currencyCode = price.currencyCode;\n        let value = price.value * percentage / 100;\n        if (pricePerAdult && pricePerAdult.value) {\n            value += pricePerAdult.value * adults * nights;\n            currencyCode = pricePerAdult.currencyCode;\n        }\n        if (pricePerChild && pricePerChild.value) {\n            value += pricePerChild.value * children * nights;\n            currencyCode = pricePerChild.currencyCode;\n        }\n        items.push({\n            type: taxType,\n            price: {\n                value: Math.round(value),\n                currencyCode,\n            },\n            paidAtHotel: excludedFromTotals || paidAtHotel || payLater || false,\n            excludedFromTotals,\n        });\n    }\n    return items;\n}\n\nasync function lookupTaxRates(hotelId) {\n    // TODO replace with real lookup and ctx-scoped cache\n    return ctx.resolveParam('taxRates');\n}\n\nfunction calcParty(search) {\n    let adults = 0;\n    let persons = 0;\n    for (const room of search.rooms) {\n        for (const age of room.ages) {\n            persons += 1;\n            if (age >= 18) {\n                adults += 1;\n            }\n        }\n    }\n    return { adults, persons, children: persons - adults };\n}\n\nfunction calcNights(search) {\n    const from = ctx.moment(search.checkInDate);\n    const to = ctx.moment(search.checkOutDate);\n    return to.diff(from, 'days');\n}\n\nfunction sumItems(priceBreakdown) {\n    return priceBreakdown.reduce((acc, v) => acc + v.price.value, 0);\n}\n",
+                "type": "other/javascript"
+            }
+        ]
+    },
+    "integrity": {
+        "group": "HotelBooking",
+        "filename": "Room_Price_Breakdown.json",
+        "sha": "d16d2e59433880f29640776732cf2b444243be07",
+        "hash": "b7bd09ef557613db6e7c5635afb31f970445439a"
+    }
+}
