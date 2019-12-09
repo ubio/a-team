@@ -14,19 +14,12 @@
                 "type": "other/javascript"
             }
         ]
-    },
+    }
+},
     "integrity": {
         "group": "HotelBooking",
         "filename": "Room_Price_Breakdown.json",
         "sha": "8176965b087168f1b72fb35b003d98d3a675ccaa",
         "hash": "33fa096c9643b5012defcdebbbeb2be0c60cf0ed"
-    }
-  ]
-},
-    "integrity": {
-        "group": "HotelBooking",
-        "filename": "Room_Price_Breakdown.json",
-        "sha": "64dde22b463c155a429f556ea54cb3b76b7cd25d",
-        "hash": "b7b09d85c5a555dd72e9b84c4d55fd48b0e9b29d"
     }
 }
