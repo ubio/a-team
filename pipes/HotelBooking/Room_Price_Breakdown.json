@@ -14,8 +14,7 @@
                 "type": "other/javascript"
             }
         ]
-    }
-},
+    },
     "integrity": {
         "group": "HotelBooking",
         "filename": "Room_Price_Breakdown.json",
