@@ -1,0 +1,50 @@
+{
+    "id": "a575f093-281a-4d0e-abef-42a60f85e293",
+    "label": "Query By Text",
+    "params": [
+        {
+            "value": null,
+            "name": "text",
+            "type": "string",
+            "label": "Text"
+        }
+    ],
+    "pipeline": {
+        "id": "70cad5f4-482e-473f-ad36-0fbae2227bb6",
+        "pipes": [
+            {
+                "id": "e951dc8b-94a3-4071-b934-ef0f72aaef26",
+                "notes": "",
+                "enabled": true,
+                "bindings": [],
+                "pipeline": {
+                    "id": "2fdb8685-9da9-40d2-b360-16460faf972e",
+                    "pipes": [
+                        {
+                            "id": "4636ebdb-b3c7-42fa-b832-4a78ab0ba3ee",
+                            "notes": "",
+                            "enabled": true,
+                            "bindings": [],
+                            "type": "dom/text"
+                        },
+                        {
+                            "id": "033aaaf5-a9c0-446d-9525-ebc02f0b15f0",
+                            "notes": "",
+                            "enabled": true,
+                            "bindings": [
+                                {
+                                    "name": "text",
+                                    "binding": "text"
+                                }
+                            ],
+                            "text": "",
+                            "type": "value/contains-text"
+                        }
+                    ]
+                },
+                "type": "other/filter"
+            }
+        ]
+    },
+    "integrity": null
+}
