@@ -1,0 +1,47 @@
+{
+    "id": "22d344ab-a87b-4957-8854-fdc365351780",
+    "label": "Find Topmost",
+    "params": [],
+    "pipeline": {
+        "id": "120223a2-1583-4136-91c0-13d6cf060bb7",
+        "pipes": [
+            {
+                "id": "815e5cef-c76c-4cb5-9013-06f432c5c84f",
+                "notes": "",
+                "enabled": true,
+                "bindings": [],
+                "pipeline": {
+                    "id": "82164efe-0a72-4f89-a789-e412a0714753",
+                    "pipes": [
+                        {
+                            "id": "aa6762e8-30bf-478c-ae98-19e772d2e264",
+                            "notes": "",
+                            "enabled": true,
+                            "bindings": [],
+                            "mode": "value",
+                            "expression": "const zIndex = el && el.evaluateJson((el) => { \n  let max = 0;\n  \n  while(el.offsetParent) {\n    let z = parseInt(window.getComputedStyle(el).getPropertyValue('z-index'));\n    if (z && z > max) {\n      max = z;\n    }\n    \n    el = el.offsetParent;\n  }\n  \n  z = parseInt(window.getComputedStyle(el).getPropertyValue('z-index'));\n  if (z && z > max) {\n    max = z;\n  }\n  \n  return max;\n});\nreturn zIndex;",
+                            "type": "other/javascript"
+                        }
+                    ]
+                },
+                "type": "other/sort-by"
+            },
+            {
+                "id": "25dfac89-77f7-4587-9acf-6dc12b2e7cfa",
+                "notes": "",
+                "enabled": true,
+                "bindings": [],
+                "type": "other/reverse"
+            },
+            {
+                "id": "b7b58ba1-4393-45b2-9c67-3be57f122d7c",
+                "notes": "",
+                "enabled": true,
+                "bindings": [],
+                "count": 1,
+                "type": "other/limit"
+            }
+        ]
+    },
+    "integrity": null
+}
